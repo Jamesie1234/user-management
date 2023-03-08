@@ -4,8 +4,8 @@ set –e
 USER_STACK_NAME="UserManagementStack"
 GROUP_STACK_NAME="UserGroupManagementStack"
 #PROFILE="ss-prod"
-ACCOUNT_ID="548760365095" #"$ACCOUNT_ID" #Replace with account ID if running it locally #$ACCOUNT_ID
-REGION="eu-west-1"   #"$REGION" #Replace with account region if running it locally #$REGION
+ACCOUNT_ID="$ACCOUNT_ID" #"$ACCOUNT_ID" #Replace with account ID if running it locally #$ACCOUNT_ID
+REGION="$REGION"   #"$REGION" #Replace with account region if running it locally #$REGION
 
 #Create or update IAM user pipeline
 if ! aws cloudformation describe-stacks --stack-name ${USER_STACK_NAME} --region ${REGION} ; then
