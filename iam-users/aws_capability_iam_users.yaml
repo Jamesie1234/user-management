@@ -1,0 +1,29 @@
+Description: >-
+  Account IAM User capability
+
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  SharedServiceNonProdTest:
+    Type: String
+    Default: 'SharedServiceNonProdTest'
+
+  SharedServiceProdTest:
+    Type: String
+    Default: 'SharedServiceProdTest'
+
+Resources:
+  AddUsersToSharedServiceNonProdTest:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: !Ref SharedServiceNonProdTest
+      Users:
+        - "test@gmail.com"
+
+
+  AddUsersToSharedServiceProdTest:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: !Ref SharedServiceProdTest
+      Users:
+        - "test@gmail.com"

@@ -1,0 +1,50 @@
+Description: >-
+  Account IAM (Policy/Group/Role) capability
+AWSTemplateFormatVersion: 2010-09-09
+
+Resources:
+  SharedServiceNonProdTest:
+    Type: 'AWS::IAM::Group'
+    Properties:
+      GroupName: SharedServiceNonProdTest
+
+  SharedServiceNonProdTestPolicy:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: SharedServiceNonProdTestPolicy
+      Groups:
+        - !Ref SharedServiceNonProdTest
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Resource:
+              - 'arn:aws:iam::012345678901:role/PowerUsers'
+
+            Condition:
+              Bool:
+                'aws:MultiFactorAuthPresent': 'true'
+
+  SharedServiceProdTest:
+    Type: 'AWS::IAM::Group'
+    Properties:
+      GroupName: SharedServiceProdTest
+
+  SharedServiceProdTestPolicy:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: SharedServiceProdTestPolicy
+      Groups:
+        - !Ref SharedServiceProdTest
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Resource:
+              - 'arn:aws:iam::0-12345678901:role/Monitor'
+
+            Condition:
+              Bool:
+                'aws:MultiFactorAuthPresent': 'true'
